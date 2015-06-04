@@ -1,0 +1,23 @@
+%h1 空间管理
+
+%table
+  %thead
+    %tr
+      %th 空间名称
+      %th 文件数量
+      %th
+      %th
+      %th
+
+  %tbody
+    - @buckets.each do |bucket|
+      %tr
+        %td= bucket.name
+        %td= bucket.resources.count
+        %td= link_to '显示', manage_bucket_path(bucket)
+        %td= link_to '编辑', edit_manage_bucket_path(bucket)
+        %td= link_to '删除', manage_bucket_path(bucket), method: :delete, data: { confirm: '确定删除嘛？' }
+
+%br
+
+= link_to '+新建空间', new_manage_bucket_path

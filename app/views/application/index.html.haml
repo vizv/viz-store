@@ -1,0 +1,22 @@
+%h1 Viz 花了半下午外加半上午编写的名字超长的一个超级简陋但是能工作的云储存平台
+
+%h2
+- if user_signed_in?
+  已登录：
+  = current_user.name
+  ，然后你
+  = link_to '可以登出', destroy_user_session_path, method: :delete
+- else
+  尚未
+  = link_to '登录', new_user_session_path
+  ！拒绝访问
+
+- if user_signed_in?
+  %ul
+    %li
+      现在你可以
+      = link_to '管理空间', manage_buckets_path
+      了，
+      %b 然而并没有什么卵用
+
+%h2 已经可以使用了 用户: viz，密码: changeme 欢迎尝试去修改密码或者尝试去毁掉它……

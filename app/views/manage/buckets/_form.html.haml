@@ -1,0 +1,15 @@
+= form_for [:manage, @bucket] do |f|
+  - if @bucket.errors.any?
+    #error_explanation
+      %h2= "#{@bucket.errors.count} 个错误导致空间无法保存："
+      %ul
+        - @bucket.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name, '空间名称'
+    %br
+    = f.text_field :name, autofocus: true
+
+  .actions
+    = f.submit '提交'

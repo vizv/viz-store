@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%table
+  %thead
+    %tr
+      %th 空间名称
+      %td= @bucket.name
+    %tr
+      %th 文件数量
+      %td= @bucket.resources.count
+
+- if @bucket.resources.count == 0
+  %p 还没有文件……
+- else
+  %p= link_to '进入空间', manage_bucket_resources_path(@bucket)
+
+= link_to '上传文件', new_manage_bucket_resource_path(@bucket)
+\|
+= link_to '编辑', edit_manage_bucket_path(@bucket)
+\|
+= link_to '返回', manage_buckets_path

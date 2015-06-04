@@ -1,0 +1,20 @@
+= form_for [:manage, @bucket, @resource] do |f|
+  - if @resource.errors.any?
+    #error_explanation
+      %h2= "#{@bucket.errors.count} 个错误导致文件无法保存："
+      %ul
+        - @resource.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :path, '文件名'
+    %br
+    = f.text_field :path, autofocus: true
+
+  .field
+    = f.label :file, '文件'
+    %br
+    = f.file_field :file, autofocus: true
+
+  .actions
+    = f.submit '提交'
