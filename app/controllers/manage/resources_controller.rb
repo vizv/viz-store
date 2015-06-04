@@ -1,5 +1,6 @@
 module Manage
   class ResourcesController < ApplicationController
+    before_action :set_bucket
     before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
     # GET /resources
@@ -66,9 +67,12 @@ module Manage
 
     private
       # Use callbacks to share common setup or constraints between actions.
+      def set_bucket
+        @bucket = Bucket.find(params[:bucket_id])
+      end
+
       def set_resource
         @resource = Resource.find(params[:id])
-        @bucket = @resource.bucket
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.

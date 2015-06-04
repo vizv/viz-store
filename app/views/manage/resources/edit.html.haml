@@ -1,7 +1,7 @@
-%h1 Editing resource
+%h1 编辑资源
 
 = render 'form'
 
-= link_to 'Show', manage_bucket_resource_path(@bucket, @resource)
+= link_to '查看', manage_bucket_resource_path(@bucket, @resource)
 \|
-= link_to 'Back', manage_bucket_path(@resource.bucket)
+= link_to '返回', manage_bucket_resources_path(@resource.bucket)

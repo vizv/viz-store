@@ -12,26 +12,8 @@
 - if @bucket.resources.count == 0
   %p 还没有文件……
 - else
-  %table
-    %thead
-      %tr
-        %th 文件名
-        %th 下载链接
-        %th
-        %th
-        %th
+  %p= link_to '进入空间', manage_bucket_resources_path(@bucket)
 
-    %tbody
-      - @bucket.resources.each do |resource|
-        %tr
-          %td= resource.path
-          %td= resource.file_url
-          %td= link_to '显示', manage_bucket_resource_path(@bucket, resource)
-          %td= link_to '编辑', edit_manage_bucket_resource_path(@bucket, resource)
-          %td= link_to '删除', manage_bucket_resource_path(@bucket, resource), method: :delete, data: { confirm: '确定删除嘛？' }
-
-= link_to '上传文件', new_manage_bucket_resource_path(@bucket)
-\|
 = link_to '编辑', edit_manage_bucket_path(@bucket)
 \|
 = link_to '返回', manage_buckets_path

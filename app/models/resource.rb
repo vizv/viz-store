@@ -12,4 +12,8 @@ class Resource
   belongs_to :bucket
 
   index({ bucket_id: 1, path: 1 }, { unique: true, background: 1 })
+
+  def link
+    "/#{self.bucket.name}/#{self.path}"
+  end
 end
