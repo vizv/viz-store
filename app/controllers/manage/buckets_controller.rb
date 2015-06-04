@@ -29,7 +29,7 @@ module Manage
 
       respond_to do |format|
         if @bucket.save
-          format.html { redirect_to [:manage, @bucket], notice: 'Bucket was successfully created.' }
+          format.html { redirect_to [:manage, @bucket], notice: '空间创建成功' }
           format.json { render :show, status: :created, location: @bucket }
         else
           format.html { render :new }
@@ -43,7 +43,7 @@ module Manage
     def update
       respond_to do |format|
         if @bucket.update(bucket_params)
-          format.html { redirect_to [:manage, @bucket], notice: 'Bucket was successfully updated.' }
+          format.html { redirect_to [:manage, @bucket], notice: '空间更新成功' }
           format.json { render :show, status: :ok, location: @bucket }
         else
           format.html { render :edit }
@@ -57,7 +57,7 @@ module Manage
     def destroy
       @bucket.destroy
       respond_to do |format|
-        format.html { redirect_to manage_buckets_path, notice: 'Bucket was successfully destroyed.' }
+        format.html { redirect_to manage_buckets_path, notice: '空间删除成功' }
         format.json { head :no_content }
       end
     end

@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   root 'application#index'
   match '/:bucket/*path' => 'application#resource', via: :get
+  match '/:bucket' => 'application#resource', via: :get
 end

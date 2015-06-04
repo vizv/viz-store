@@ -31,7 +31,7 @@ module Manage
 
       respond_to do |format|
         if @resource.save
-          format.html { redirect_to [:manage, @bucket, @resource], notice: 'Resource was successfully created.' }
+          format.html { redirect_to [:manage, @resource.bucket, @resource], notice: '文件上传成功' }
           format.json { render :show, status: :created, location: @resource }
         else
           format.html { render :new }
@@ -45,7 +45,7 @@ module Manage
     def update
       respond_to do |format|
         if @resource.update(resource_params)
-          format.html { redirect_to [:manage, @bucket, @resource], notice: 'Resource was successfully updated.' }
+          format.html { redirect_to [:manage, @bucket, @resource], notice: '文件更新成功' }
           format.json { render :show, status: :ok, location: @resource }
         else
           format.html { render :edit }
@@ -59,7 +59,7 @@ module Manage
     def destroy
       @resource.destroy
       respond_to do |format|
-        format.html { redirect_to manage_bucket_path(@resource.bucket), notice: 'Resource was successfully destroyed.' }
+        format.html { redirect_to manage_bucket_path(@resource.bucket), notice: '文件删除成功' }
         format.json { head :no_content }
       end
     end
