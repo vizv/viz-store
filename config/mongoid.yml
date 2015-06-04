@@ -99,3 +99,17 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
+production:
+  sessions:
+    default:
+      database: <%= ENV["STORE_INSTANCE_NAME"] %>
+      username: <%= ENV["STORE_USERNAME"] %>
+      password: <%= ENV["STORE_PASSWORD"] %>
+      hosts:
+        - <%= "#{ENV["STORE_PORT_27017_TCP_ADDR"]}:#{ENV["STORE_PORT_27017_TCP_PORT"]}" %>
+      options:
+        read: primary
+        # In the test environment we lower the retries and retry interval to
+        # low amounts for fast failures.
+        max_retries: 1
+        retry_interval: 0

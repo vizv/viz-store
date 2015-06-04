@@ -20,5 +20,5 @@ WORKDIR /app/
 RUN /app/lib/support/build.sh
 
 # setup the app
-EXPOSE 3000
+EXPOSE 8080
 ENTRYPOINT /app/lib/support/start.sh

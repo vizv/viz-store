@@ -3,4 +3,15 @@ set -e
 source /etc/profile.d/rvm.sh
 
 cd /app
-rvmsudo -u git -H bundle exec rails server RAILS_ENV=production
+
+if [ "$FORCE_RESET_DB" = "true" ]
+    bundle exec rake db:reset
+fi
+
+if [ "$RAILS_ENV" = "production" ]
+then
+    bundle exec rake assets:precompile
+    bundle exec unicorn
+else
+    bundle exec rails s -p 8080
+fi
