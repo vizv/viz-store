@@ -1,5 +1,6 @@
 module Manage
   class ResourcesController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_bucket
     before_action :set_resource, only: [:show, :edit, :update, :destroy]
 

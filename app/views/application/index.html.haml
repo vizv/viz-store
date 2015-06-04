@@ -11,10 +11,12 @@
   = link_to '登录', new_user_session_path
   ！拒绝访问
 
-%ul
-  %li
-    现在你可以
-    = link_to '管理空间', manage_buckets_path
-    了，
-    %b 然而并没有什么卵用
+- if user_signed_in?
+  %ul
+    %li
+      现在你可以
+      = link_to '管理空间', manage_buckets_path
+      了，
+      %b 然而并没有什么卵用
 
+%h2 已经可以使用了 用户: viz，密码: changeme 欢迎尝试去修改密码或者尝试去毁掉它……
