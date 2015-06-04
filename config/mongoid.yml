@@ -106,7 +106,7 @@ production:
       username: <%= ENV["STORE_USERNAME"] %>
       password: <%= ENV["STORE_PASSWORD"] %>
       hosts:
-        - <%= "#{ENV["STORE_PORT_27017_TCP_ADDR"]}:#{ENV["STORE_PORT_27017_TCP_PORT"]}" %>
+        - <%= ENV["STORE_ADDRESS"] %>
       options:
         read: primary
         # In the test environment we lower the retries and retry interval to
