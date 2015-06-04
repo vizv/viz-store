@@ -1,10 +1,20 @@
-= form_for @resource do |f|
+= form_for [:manage, @bucket || :bucket, @resource] do |f|
   - if @resource.errors.any?
     #error_explanation
       %h2= "#{pluralize(@resource.errors.count, "error")} prohibited this resource from being saved:"
       %ul
         - @resource.errors.full_messages.each do |msg|
           %li= msg
+
+  .field
+    = f.label :path, '文件名'
+    %br
+    = f.text_field :path, autofocus: true
+
+  .field
+    = f.label :file, '文件'
+    %br
+    = f.file_field :file, autofocus: true
 
   .actions
     = f.submit 'Save'

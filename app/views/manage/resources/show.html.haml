@@ -1,0 +1,20 @@
+%p#notice= notice
+
+%table
+  %thead
+    %tr
+      %th 文件名
+      %td= @resource.path
+    %tr
+      %th 下载链接
+      %td= @resource.file_url
+    %tr
+      %th MIME Type
+      %td= @resource.file.content_type
+    %tr
+      %th 文件大小
+      %td= number_to_human_size @resource.file.size
+
+= link_to 'Edit', edit_manage_bucket_resource_path(@bucket, @resource)
+\|
+= link_to 'Back', manage_bucket_path(@resource.bucket)

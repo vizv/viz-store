@@ -1,0 +1,7 @@
+%h1 Editing resource
+
+= render 'form'
+
+= link_to 'Show', manage_bucket_resource_path(@bucket, @resource)
+\|
+= link_to 'Back', manage_bucket_path(@resource.bucket)

@@ -2,8 +2,8 @@ class Resource
   include Mongoid::Document
 
   field :path, type: String
-  validates :name, presence: true, uniqueness: true,
-                   format: { with: /[^\/].*/, without: /\/\// }
+  validates :path, presence: true, uniqueness: true,
+                   format: { without: /\/\/|^\// }
 
   mount_uploader :file, ResourceUploader
 
