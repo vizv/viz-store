@@ -8,7 +8,8 @@ export STORE_ADDRESS="${STORE_PORT_27017_TCP_ADDR}:${STORE_PORT_27017_TCP_PORT}"
 
 if [ "$FORCE_RESET_DB" = "true" ]
 then
-    bundle exec rake db:reset
+    bundle exec rake db:purge
+    bundle exec rake db:seed
 fi
 
 if [ "$RAILS_ENV" = "production" ]
