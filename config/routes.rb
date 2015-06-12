@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users, only: [:sessions]
+  # FIXME: routes for users
+  # devise_for :users, only: [:sessions]
 
   namespace :manage do
     resources :buckets do

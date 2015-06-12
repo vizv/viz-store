@@ -29,4 +29,7 @@ class ApplicationController < ActionController::Base
     json[:error] = @error unless @error.nil?
     render status: :not_found, content_type: 'application/json', json: json
   end
+
+  def authenticate_user!
+  end
 end
