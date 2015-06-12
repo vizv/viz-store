@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
-source /etc/profile.d/rvm.sh
-
-cd /app
+[ -f /etc/profile.d/rvm.sh ] && source /etc/profile.d/rvm.sh
 
 export STORE_ADDRESS="${STORE_PORT_27017_TCP_ADDR}:${STORE_PORT_27017_TCP_PORT}"
 

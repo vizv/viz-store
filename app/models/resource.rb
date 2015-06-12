@@ -1,13 +1,19 @@
 class Resource
   include Mongoid::Document
+  include Manage::ResourcesHelper
 
   field :path, type: String
-  validates_presence_of :path, message: '文件名不能为空'
+  validates_presence_of   :path, message: '文件名不能为空'
   validates_uniqueness_of :path, message: '文件名已使用，请尝试其他文件名'
-  validates_format_of :path, without: /\/\/|^\//,
+  validates_format_of     :path, without: /\/\/|^\//,
     message: '文件名不能以 / 开头，并且之间不能包含连续的两个 /，请尝试其他名称。'
 
-  mount_uploader :file, ResourceUploader
+  field :file_id, type: BSON::ObjectId
+  validates_presence_of   :file_id, message: '文件上传失败，请重试'
+
+  after_save do |document|
+    retrieve_file self, true
+  end
 
   belongs_to :bucket
 

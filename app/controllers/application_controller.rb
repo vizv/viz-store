@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Manage::ResourcesHelper
   protect_from_forgery with: :exception
 
   def resource
@@ -7,14 +8,15 @@ class ApplicationController < ActionController::Base
     (format = params[:format]) && (@path = "#{@path}.#{format}")
 
     begin
-      file = Bucket.find_by(name: @bucket).resources.find_by(path: @path).file
+      resource = Bucket.find_by(name: @bucket).resources.find_by(path: @path)
+      cached_file = retrieve_file resource
     rescue Mongoid::Errors::DocumentNotFound => e
       @error = 'File not found!'
       report
       return
     end
 
-    send_data file.read, type: file.content_type, disposition: 'inline'
+    send_file cached_file, disposition: 'inline'
   end
 
   def configure_permitted_parameters
