@@ -47,6 +47,7 @@ module Manage
     def update
       respond_to do |format|
         if @resource.update(resource_params)
+          @file.destroy!
           format.html { redirect_to [:manage, @bucket, @resource], notice: '文件更新成功' }
           format.json { render :show, status: :ok, location: @resource }
         else
@@ -60,6 +61,7 @@ module Manage
     # DELETE /resources/1.json
     def destroy
       @resource.destroy
+      @file.destroy!
       respond_to do |format|
         format.html { redirect_to manage_bucket_path(@resource.bucket), notice: '文件删除成功' }
         format.json { head :no_content }
@@ -67,18 +69,26 @@ module Manage
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
       def set_bucket
         @bucket = Bucket.find(params[:bucket_id])
       end
 
       def set_resource
         @resource = Resource.find(params[:id])
+        @file = Mongoid::GridFS.get @resource.file_id
       end
 
-      # Never trust parameters from the scary internet, only allow the white list through.
       def resource_params
-        params[:resource].permit(:path, :file)
+        p = params[:resource].permit(:path, :file)
+
+        if file = p.delete(:file)
+          begin
+            p[:file_id] = Mongoid::GridFS.put(file).id
+          rescue Exception => e
+          end
+        end
+
+        p
       end
   end
 end

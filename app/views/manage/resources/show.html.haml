@@ -10,10 +10,10 @@
       %td= link_to @resource.link, @resource.link
     %tr
       %th MIME Type
-      %td= @resource.file.content_type
+      %td= @file.contentType
     %tr
       %th 文件大小
-      %td= number_to_human_size @resource.file.size
+      %td= number_to_human_size @file.length
 
 = link_to '编辑', edit_manage_bucket_resource_path(@bucket, @resource)
 \|
