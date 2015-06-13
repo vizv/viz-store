@@ -2,6 +2,7 @@ module Manage
   class BucketsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_bucket, only: [:show, :edit, :update, :destroy]
+    rescue_from Mongoid::Errors::DocumentNotFound, :with => :handle_not_found
 
     # GET /buckets
     # GET /buckets.json
@@ -72,6 +73,13 @@ module Manage
       # Never trust parameters from the scary internet, only allow the white list through.
       def bucket_params
         params[:bucket].permit(:name)
+      end
+
+      def handle_not_found e
+        case e.klass
+        when Bucket
+          report :not_found, error: "未找到 ID 为 #{e.params.first} 的储存空间"
+        end
       end
   end
 end

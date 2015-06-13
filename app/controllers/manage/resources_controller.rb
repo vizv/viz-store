@@ -3,6 +3,7 @@ module Manage
     before_action :authenticate_user!
     before_action :set_bucket
     before_action :set_resource, only: [:show, :edit, :update, :destroy]
+    rescue_from Mongoid::Errors::DocumentNotFound, :with => :handle_not_found
 
     # GET /resources
     # GET /resources.json
@@ -89,6 +90,15 @@ module Manage
         end
 
         p
+      end
+
+      def handle_not_found e
+        case e.klass
+        when Bucket
+          report :not_found, error: "未找到 ID 为 #{e.params.first} 的储存空间"
+        when Resource
+          report :not_found, error: "未找到 ID 为 #{e.params.first} 的资源"
+        end
       end
   end
 end

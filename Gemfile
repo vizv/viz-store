@@ -18,7 +18,9 @@ gem 'therubyracer', platforms: :ruby
 
 # for persistent storage
 gem 'mongoid', '~> 4.0.0'
-gem 'mongoid-grid_fs'
+
+# password hashing
+gem 'bcrypt'
 
 # FIXME: remove us after migrate to AngularJS
 gem 'jquery-rails'
@@ -33,6 +35,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 # development & test deps
