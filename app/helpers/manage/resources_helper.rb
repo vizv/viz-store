@@ -10,8 +10,11 @@ module Manage
         FileUtils.mkdir_p File.dirname(cache_file)
 
         # write to cache
-        target = File.open(cache_file, "wb")
-        Mongoid::GridFS.get(resource.file_id).each { |chuck| target.write chuck }
+        File.open(cache_file, "wb") do |target|
+          Mongoid::GridFS.get(resource.file_id).each do |chuck|
+            target.write chuck
+          end
+        end
       end
 
       cache_file
